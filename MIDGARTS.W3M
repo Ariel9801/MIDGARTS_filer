@@ -1,0 +1,45 @@
+'MID GARTS ( 80386ˆÈ~‚ÌCPU‘Î‰‚Æ86‰¹Œ¹‘Î‰‚Ì‰ü‘¢ )  (1MB)
+
+[_TRACK_COPY:
+	var	a,sw,ad,dl,dn,dd,dg,df;
+
+[L10000:
+	dl=0x03;dn=0x08;dd=0x00;dg=0x76;df=0xe5;poke(MEM+ILF)=0x01;sw=0;
+	a=FNV('R');
+	iset(MI,dl,D0,T,dn,dd,dg,df,0,0);
+	iset(RT);
+	if(peek(MEM+RST)!=0) goto L10000;
+
+	ad=mscn( MEM2 , MEM2+0x1fff ,0xe8,0xe5,0x00,0xb8,0x00,0x10,0x8e,0xd8);
+	if(ad<=(MEM2+0x1fff)){
+	    hstr( ad+8    ,"b4,30,8e,c0,33,c0,33,ff" );
+	    sw++;
+	}
+
+	ad=mscn( MEM2 , MEM2+0x1fff ,0xe8,0x45,0x00,0xb8,0x00,0x00,0x8e,0xc0);
+	if(ad<=(MEM2+0x1fff)){
+	    hstr( ad+3    ,"ba,30,27,e8,95,0a,90,90,b8,00,00,8e,c0,8c,c8,8e" );
+	    hstr( ad+3+16 ,"d8,26,a3,52,00,26,a3,2a,00,b8,db,df,26,a3,50,00" );
+	    sw++;
+	}
+
+	a=FNV('W');
+	iset(WI,,D1);
+	iset(WT);
+	if(peek(MEM+WST)!=0) goto L10000;
+	if(sw!=0) printf("/Type = %d \n",sw);
+	return;
+
+
+[_PARAMETER:
+	data 0;
+	data 153;
+	data 1;
+	data "----------------------------------------";
+	data "----------------------------------------";
+	data "----------------------------------------****";
+	data "----------------------------------------****";
+	data "MID GARTS ( 80386ˆÈ~‚ÌCPU‘Î‰‚Æ86‰¹Œ¹‘Î‰‚Ì‰ü‘¢ )";
+	data "by Ariel";
+	data "(c) Ariel";
+
